@@ -16,7 +16,7 @@ test:
   database: ideahandler_test
   username: root
   password:
-  
+    
 
 production:
   adapter: mysql2
@@ -25,4 +25,5 @@ production:
   username: root
   password: 
   socket: /var/run/mysqld/mysqld.sock
- 
+  host: localhost
+  port: 3306
