@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @user.name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @user.email %>
+</p>
+
+<p>
+  <b>Phone number:</b>
+  <%= @user.phone_number %>
+</p>
+
+<nav class="round">
+ <ul>
+  <li><%= link_to "Search for new idea", searchidea_path  %></li>
+  <li><%= link_to "Create new idea", newidea_path  %></li>
+  <li><%= link_to "signout", signout_path  %></li><br/>
+ </ul>
+</nav>

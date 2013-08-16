@@ -1,0 +1,12 @@
+<%= form_tag search_path do %>
+  <%= label_tag :name %>
+  <%= autocomplete_field_tag 'name', '', autocomplete_idea_name_ideas_path, :size => 75,:style => "width: 14%;" %>
+ <%= submit_tag "Start the AutoThink" %>
+<% end %>
+ 
+
+
+ 
+
+
+

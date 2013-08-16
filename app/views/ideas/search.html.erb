@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+      <%= form_tag search_path do %>
+      <%= label_tag :name %>
+      <%= autocomplete_field_tag 'name', '', autocomplete_idea_name_ideas_path, :size => 75,:style => "width: 14%;" %>
+     <%= submit_tag "Start the AutoThink" %>
+    <% end %>
+
+    <div class="container">
+      <h3>Ideas</h3>
+      <ul>
+        <%= @search.results.length %>
+           <% @search.results.each do |document| %>
+            Name :<%= document.name %><br/>
+            Description:<%= document.description %><br/>
+            <li><%= link_to "Follow that idea", follow_path(:idea_id => document.id) %></li>
+            <li><%= link_to "Comment on that idea", '#', :id => "addcomment" %></li>
+           
+            <li><%= link_to "Show all comments",usershowcomment_path(:idea_id => document.id) %></li>
+            
+            <div id = "comment" style = "display:none">
+              <%= form_tag comment_path do %>
+              <%= text_area_tag "comment" %>
+              <%= hidden_field_tag "idea_id", document.id %>
+              <div>
+               <%= submit_tag "Submit" %>
+              </div>
+        <% end %>
+          </div>
+      <% end %> 
+        
+      </ul>
+    </div>
+  </body>
+</html>
+
+<script type="text/javascript">
+  $("#addcomment").on('click',function(){
+     $("#comment").toggle();
+  });
+  
+
+</script>

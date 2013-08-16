@@ -1,0 +1,26 @@
+<p>
+  <b>Welcome </b>
+  <%= @user.email %>
+</p>
+<nav class="round">
+ <ul>
+  <li><%= link_to  "Search for new idea", searchidea_path%></li>
+  <li><%= link_to "Create new idea", newidea_path  %></li>
+  <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+ </ul>
+ <h5> your created ideas </h5>
+ <% @initiate.each do |initiat| %>
+ Name :<%= initiat.name %><br/>
+ Description :<%= initiat.description %><br/>
+ <%= link_to "Delete That idea", delete_path(:id => initiat.id) %>
+ <%= link_to "Update That idea", edit_path(:id => initiat.id) %>
+ <br/>
+ <% end %>
+
+ <h5> Ideas followed by you </h5>
+ <% @follow.each do |follow| %>
+ Name :<%= follow.name %><br/>
+ Description :<%= follow.description %><br/>
+ <br/>
+ <% end %>
+</nav>
