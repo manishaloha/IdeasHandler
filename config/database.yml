@@ -4,7 +4,7 @@ development:
   database: ideahandler_development
   username: root
   password: 
-  host: localhost:3306
+  
   #socket: /var/run/mysqld/mysqld.sock
 
   # Warning: The database defined as 'test' will be erased and
@@ -16,7 +16,7 @@ test:
   database: ideahandler_test
   username: root
   password:
-  host: localhost:3306
+  
 
 production:
   adapter: mysql2
@@ -24,5 +24,5 @@ production:
   database: ideahandler_production
   username: root
   password: 
-  #socket: /var/run/mysqld/mysqld.sock
-  host: localhost:3306
+  socket: /var/run/mysqld/mysqld.sock
+ 
