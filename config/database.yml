@@ -22,4 +22,4 @@ production:
   database: ideahandler_production
   username: root
   password: 
-  socket: /var/run/mysqld/mysqld.sock
+  
