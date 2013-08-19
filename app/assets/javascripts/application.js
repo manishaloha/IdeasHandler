@@ -14,5 +14,5 @@
 //= require jquery_ujs
 //= require autocomplete-rails
 //= require jquery-ui
-
+//= require bootstrap
 
