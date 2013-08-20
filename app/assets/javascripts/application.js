@@ -15,4 +15,5 @@
 //= require autocomplete-rails
 //= require jquery-ui
 //= require bootstrap
+//= require jquery.tokeninput
 

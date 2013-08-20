@@ -2,6 +2,7 @@ class IdeasController < ApplicationController
   # GET /ideas
   # GET /ideas.json
   autocomplete :idea, :name
+  before_filter :authenticate
   def index
     @ideas = Idea.all
 
@@ -97,12 +98,24 @@ class IdeasController < ApplicationController
   def search
     name = params[:name]
     p name
-    @search = Idea.seac name
-    p @search.results
-   
+    tag_name = params[:tag_name]
+    if name != ""
+      @search = Idea.seac name
+      p @search.results
+      @search.results.each do |document| 
+        @follow = Userideas.where(idea_id:document.id,user_id:current_user.id,follow:true)  
+      end    
+      
+    else 
+      @search = Idea.seac_by_tech tag_name 
+      @search.results.each do |document| 
+        @follow = Userideas.where(idea_id:document.id,user_id:current_user.id,follow:true)
+      end
+    end 
+    
     respond_to do |format|
-      format.html 
-      format.json { render json: @search }
+        format.html 
+        format.json { render json: @search }
     end
   end 
 end

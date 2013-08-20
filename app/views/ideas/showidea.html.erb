@@ -1,8 +1,35 @@
 <%= form_tag search_path do %>
-  <%= label_tag :name %>
+  <div id ="tags"> 
+  <%= label_tag "search By name" %>
   <%= autocomplete_field_tag 'name', '', autocomplete_idea_name_ideas_path, :size => 75,:style => "width: 14%;" %>
- <%= submit_tag "Start the AutoThink" %>
+  <%= label_tag "search By Technology" %> 
+  <%= text_field_tag :tag_name %><br/>
+  <%= submit_tag "Start the AutoThink" %>
+</div>
 <% end %>
+
+
+<script type="text/javascript">
+ $(document).ready(function () {
+   $("#tag_name").tokenInput("/tags/token_input.json", {
+          crossDomain: false,
+          preventDuplicates: true,
+          searchDelay: 1000,
+          theme: "facebook"
+       });
+ });
+ </script>
+
+ <style type="text/css">
+  div.token-input-dropdown-facebook {
+     margin-top: -6.5%;
+     width: 15%;
+  }
+  ul.token-input-list-facebook {
+  	 width:15%;
+  }  
+
+ </style>
  
 
 

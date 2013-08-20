@@ -1,7 +1,5 @@
 Ideahandler::Application.routes.draw do
   
-  resources :userideas
-
   get "sessions/new"
 
   get "ideahandler/page"
@@ -20,14 +18,21 @@ Ideahandler::Application.routes.draw do
     get "/register" => "devise/registrations#new"
     get "/welcome" => "user#show"
     get "/follow" => "user#follow"
+    get "/unfollow" => "user#unfollow"
     post "/comment" => "user#comment"
     get "/usershowcomment" => "user#showcomment"
   end
   resources :ideas do
      get :autocomplete_idea_name, :on => :collection
-     
-    end
-    
+  end
+  
+  resources :tags do
+    collection do
+     get :token_input
+    end 
+  end
+ 
+  resources :userideas  
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

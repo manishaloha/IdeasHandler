@@ -3,20 +3,30 @@
     <title></title>
   </head>
   <body>
-      <%= form_tag search_path do %>
+    <%= form_tag search_path do %>
       <%= label_tag :name %>
       <%= autocomplete_field_tag 'name', '', autocomplete_idea_name_ideas_path, :size => 75,:style => "width: 14%;" %>
-     <%= submit_tag "Start the AutoThink" %>
+      <%= label_tag "search By Technology" %> 
+      <%= text_field_tag :tag_name %><br/>
+      <%= submit_tag "Start the AutoThink" %>
     <% end %>
 
     <div class="container">
       <h3>Ideas</h3>
       <ul>
-        <%= @search.results.length %>
            <% @search.results.each do |document| %>
             Name :<%= document.name %><br/>
             Description:<%= document.description %><br/>
-            <li><%= link_to "Follow that idea", follow_path(:idea_id => document.id) %></li>
+            Technologies:
+            <% document.tag_name.split(",").map do |tag| %>
+              <span class='tag'><%= tag %></span>
+            <% end %>                 
+            <br/>
+            <% if @follow == [] %>
+              <li><%= link_to "Follow that idea", follow_path(:idea_id => document.id) %></li>
+            <% else %>
+              <li><%= link_to "UnFollow that idea",unfollow_path(:idea_id => document.id)  %></li>
+            <% end %>  
             <li><%= link_to "Comment on that idea", '#', :id => "addcomment" %></li>
            
             <li><%= link_to "Show all comments",usershowcomment_path(:idea_id => document.id) %></li>
@@ -26,10 +36,11 @@
               <%= text_area_tag "comment" %>
               <%= hidden_field_tag "idea_id", document.id %>
               <div>
-               <%= submit_tag "Submit" %>
+                <%= submit_tag "Submit" %>
               </div>
+            </div>  
         <% end %>
-          </div>
+          
       <% end %> 
         
       </ul>
@@ -41,6 +52,19 @@
   $("#addcomment").on('click',function(){
      $("#comment").toggle();
   });
-  
-
+$(document).ready(function () {
+   $("#tag_name").tokenInput("/tags/token_input.json", {
+          crossDomain: false,
+          preventDuplicates: true,
+          searchDelay: 1000,
+          theme: "facebook"
+       });
+ });
 </script>
+ 
+<style type="text/css">
+  div.token-input-dropdown-facebook {
+     margin-top: -20%;
+    }
+</style>
+ 

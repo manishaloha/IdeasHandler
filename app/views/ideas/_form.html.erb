@@ -19,7 +19,24 @@
     <%= f.label :description %><br />
     <%= f.text_field :description %>
   </div>
+  <div class="field">
+    <%= f.label :tag_name %>
+    <%= f.text_field :tag_name %>
+  </div>  
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+$(document).ready(function () {
+   
+    $("#idea_tag_name").tokenInput("/tags/token_input.json", {
+          crossDomain: false,
+          preventDuplicates: true,
+          searchDelay: 1000,
+          theme: "facebook"
+        });
+});
+
+</script>

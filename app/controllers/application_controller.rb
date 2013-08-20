@@ -7,4 +7,10 @@ class ApplicationController < ActionController::Base
       stored_location_for(resource) || welcome_path
      end 
   end
+
+  def authenticate
+     if current_user == nil
+      redirect_to home_path, notice: "Please login"
+     end 
+  end
 end

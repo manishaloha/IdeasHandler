@@ -11,14 +11,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130814152543) do
+ActiveRecord::Schema.define(:version => 20130819110320) do
 
   create_table "ideas", :force => true do |t|
     t.string   "name"
     t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "tag_name"
   end
+
+  create_table "tagging", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "tags", :force => true do |t|
+    t.string   "name"
+    t.integer  "idea_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "tags", ["idea_id"], :name => "index_tags_on_idea_id"
 
   create_table "userideas", :force => true do |t|
     t.integer  "idea_id"
@@ -29,8 +45,6 @@ ActiveRecord::Schema.define(:version => 20130814152543) do
     t.datetime "updated_at", :null => false
     t.text     "comment"
   end
-
-  add_index "userideas", ["idea_id", "initiate", "follow"], :name => "index_userideas_on_idea_id_and_initiate_and_follow", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

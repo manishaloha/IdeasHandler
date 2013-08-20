@@ -7,7 +7,7 @@ Ideahandler::Application.initialize!
 begin
   Tire.configure do
     logger STDERR
-    url = "http://192.168.8.110:9200"
+    url = "http://192.168.8.110:9300"
   end
 rescue => e
   p "Wrong configuration: #{e}"

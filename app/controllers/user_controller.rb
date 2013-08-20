@@ -60,12 +60,12 @@ class UserController  < Devise::SessionsController
     @Userideas.initiate = false
 
     if @user == []
-      @Userideas.follow = true
+      @Userideas.follow = false
     else
       @Userideas.follow = false
     end
 
-     @Userideas.idea_id = params[:idea_id]
+    @Userideas.idea_id = params[:idea_id]
     @Userideas.comment = comment
     @Userideas.save
     redirect_to welcome_path, notice: 'successfully added a comment'
@@ -75,9 +75,17 @@ class UserController  < Devise::SessionsController
   def showcomment
     
     idea_id = params[:idea_id];
-    
     @idea = Idea.find idea_id
     @userideas = @idea.userideass
+    
+  end
+
+   def unfollow
+    
+    id = current_user.id;
+    idea_id = params[:idea_id];
+    Userideas.delete_all(idea_id:idea_id,user_id:id,follow:true)
+    redirect_to welcome_path, notice: 'Successfully following that idea.'
     
   end
 end
