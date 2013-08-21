@@ -1,70 +1,83 @@
-<html>
+<!DOCTYPE html>
+<%= javascript_include_tag "search" %>
+<%= render 'modal' %>
+<html lang="en">
   <head>
-    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
   </head>
   <body>
-    <%= form_tag search_path do %>
-      <%= label_tag :name %>
-      <%= autocomplete_field_tag 'name', '', autocomplete_idea_name_ideas_path, :size => 75,:style => "width: 14%;" %>
-      <%= label_tag "search By Technology" %> 
-      <%= text_field_tag :tag_name %><br/>
-      <%= submit_tag "Start the AutoThink" %>
-    <% end %>
-
-    <div class="container">
-      <h3>Ideas</h3>
-      <ul>
-           <% @search.results.each do |document| %>
-            Name :<%= document.name %><br/>
-            Description:<%= document.description %><br/>
-            Technologies:
-            <% document.tag_name.split(",").map do |tag| %>
-              <span class='tag'><%= tag %></span>
-            <% end %>                 
-            <br/>
-            <% if @follow == [] %>
-              <li><%= link_to "Follow that idea", follow_path(:idea_id => document.id) %></li>
-            <% else %>
-              <li><%= link_to "UnFollow that idea",unfollow_path(:idea_id => document.id)  %></li>
-            <% end %>  
-            <li><%= link_to "Comment on that idea", '#', :id => "addcomment" %></li>
-           
-            <li><%= link_to "Show all comments",usershowcomment_path(:idea_id => document.id) %></li>
-            
-            <div id = "comment" style = "display:none">
-              <%= form_tag comment_path do %>
-              <%= text_area_tag "comment" %>
-              <%= hidden_field_tag "idea_id", document.id %>
-              <div>
-                <%= submit_tag "Submit" %>
-              </div>
-            </div>  
+    <div class="container-narrow">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li class="active"><%= link_to  "Home", welcome_path%></li></li>
+          <li class="active"><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+        </ul>
+        <h3 class="muted">Idea Handler</h3>
+      </div>
+      <hr>
+      <div class="jumbotron">
+        <%= form_tag search_path do %>
+          <%= label_tag "Search By Name" %>
+          <%= autocomplete_field_tag 'name', '', autocomplete_idea_name_ideas_path, :size => 75,:style => "width: 31%;" %>
+          <%= label_tag "search By Technology" %> 
+          <%= text_field_tag :tag_name %><br/>
+          <%= submit_tag "Start the AutoThink",:id => "submit" %>
         <% end %>
-          
-      <% end %> 
-        
-      </ul>
-    </div>
+      </div>
+      <hr>
+      <div class="row-fluid marketing" style="margin-top: 0%;">
+        <div class="span6">
+         <h3>Ideas</h3>
+          <ul>
+            <% @search.results.each do |document| %>
+                Name :<%= document.name %><br/>
+                Description:<%= document.description %><br/>
+                Technologies:
+                <% document.tag_name.split(",").map do |tag| %>
+                  <span class='tag'><%= tag %></span>
+                <% end %>                 
+                <br/>
+                <% if @follow == [] %>
+                  <li><%= link_to "Follow that idea", follow_path(:idea_id => document.id) %>
+                  </li>
+                <% else %>
+                  <li><%= link_to "UnFollow that idea",unfollow_path(:idea_id => document.id)  %>
+                  </li>
+                <% end %>  
+                <li><%= link_to "Comment on that idea", '#', :id => "addcomment" %></li>
+                <li><%= link_to "Show all comments",usershowcomment_path(:idea_id => document.id) %></li>
+                <div id = "comment" style = "display:none">
+                  <%= form_tag comment_path do %>
+                    <%= text_area_tag "comment" %>
+                    <%= hidden_field_tag "idea_id", document.id %>
+                    <%= submit_tag "Submit" %>
+                  <% end %>  
+                </div>  
+              <% end %> 
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>   <!-- /container -->
   </body>
 </html>
 
+<style type="text/css">
+  body{
+    padding-top: 20px;
+    padding-bottom: 40px;
+  }
+  div.token-input-dropdown-facebook {
+    margin-top: -24.5%;
+    width: 23%;
+  }
+</style>
 <script type="text/javascript">
-  $("#addcomment").on('click',function(){
+ $("#addcomment").on('click',function(){
      $("#comment").toggle();
   });
-$(document).ready(function () {
-   $("#tag_name").tokenInput("/tags/token_input.json", {
-          crossDomain: false,
-          preventDuplicates: true,
-          searchDelay: 1000,
-          theme: "facebook"
-       });
- });
+
 </script>
- 
-<style type="text/css">
-  div.token-input-dropdown-facebook {
-     margin-top: -20%;
-    }
-</style>
- 

@@ -85,7 +85,7 @@ class TagsController < ApplicationController
 
     @names = [{"id" => "Html", "name" => "html"},{"id" => "Rails 3", "name" => "rails 3"},{"id" => "Java", "name" => "java"}] 
     @search_results = @names.select{ |hash| hash["name"].include? params[:q] }
-    p @search_results
+    
     respond_to do |format|
       format.json  { render :json => @search_results }
     end 

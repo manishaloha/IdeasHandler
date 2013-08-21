@@ -14,7 +14,7 @@ class Idea < ActiveRecord::Base
   def self.seac querystring
       s = Tire.search 'ideas/idea' do
        query do
-        string 'name:'+  querystring + '*'
+        string 'name:'+  querystring 
       end
      end
     return s
@@ -26,6 +26,6 @@ class Idea < ActiveRecord::Base
         string 'tag_name:'+  querystring
       end
      end
-    return s
+   return s
   end  
 end

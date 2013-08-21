@@ -43,14 +43,11 @@ class IdeasController < ApplicationController
   # POST /ideas
   # POST /ideas.json
   def create
-   
     @Userideas = Userideas.new
     @idea = Idea.new(params[:idea])
     @Userideas.user_id = current_user.id
     @Userideas.initiate = true
     @Userideas.follow = false
-
-
     respond_to do |format|
       if @idea.save
         @Userideas.idea_id = @idea.id
@@ -68,7 +65,6 @@ class IdeasController < ApplicationController
   # PUT /ideas/1.json
   def update
     @idea = Idea.find(params[:id])
-
     respond_to do |format|
       if @idea.update_attributes(params[:idea])
         format.html { redirect_to @idea, notice: 'Idea was successfully updated.' }
@@ -87,7 +83,7 @@ class IdeasController < ApplicationController
     @idea.destroy
 
     respond_to do |format|
-      format.html { redirect_to ideas_url }
+      format.html { redirect_to welcome_path, notice: 'Idea was successfully Delected.' }
       format.json { head :no_content }
     end
   end
@@ -97,15 +93,12 @@ class IdeasController < ApplicationController
 
   def search
     name = params[:name]
-    p name
     tag_name = params[:tag_name]
     if name != ""
       @search = Idea.seac name
-      p @search.results
       @search.results.each do |document| 
         @follow = Userideas.where(idea_id:document.id,user_id:current_user.id,follow:true)  
       end    
-      
     else 
       @search = Idea.seac_by_tech tag_name 
       @search.results.each do |document| 

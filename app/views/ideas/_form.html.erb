@@ -1,42 +1,70 @@
-<%= form_for(@idea) do |f| %>
-  <% if @idea.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@idea.errors.count, "error") %> prohibited this idea from being saved:</h2>
-
-      <ul>
-      <% @idea.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+<!DOCTYPE html>
+<%= javascript_include_tag "search" %>
+<%= render 'modal' %>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Sign in</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  </head>
+  <body>
+    <div class="container">
+      <%= form_for(@idea) do |f| %>
+         <h2 class="search-heading">New idea</h2>
+        <% if @idea.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@idea.errors.count, "error")%>    prohibited this idea from being saved:
+            </h2> 
+            <ul>
+              <% @idea.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <div class="field">
+          <%= f.label :name %>
+          <%= f.text_field :name %>
+        </div>
+        <div class="field">
+          <%= f.label :description %>
+          <%= f.text_field :description %>
+        </div>
+        <div class="field">
+          <%= f.label :tag_name %>
+          <%= f.text_field :tag_name %>
+        </div>  
+        <div class="actions">
+          <%= f.submit %>
+        </div>
       <% end %>
-      </ul>
     </div>
-  <% end %>
+  </body>
+</html>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :tag_name %>
-    <%= f.text_field :tag_name %>
-  </div>  
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+<style type="text/css">
+  body {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
+  }
+      
+  div.token-input-dropdown-facebook {
+    margin-top: -13%;
+    width: 23%;
+  }
+</style>
 
 <script type="text/javascript">
-$(document).ready(function () {
-   
-    $("#idea_tag_name").tokenInput("/tags/token_input.json", {
-          crossDomain: false,
-          preventDuplicates: true,
-          searchDelay: 1000,
-          theme: "facebook"
-        });
-});
-
+  $(document).ready(function(){
+    $("#idea_tag_name").tokenInput("/tags/token_input.json",
+    {
+      crossDomain: false,
+      preventDuplicates: true,
+      searchDelay: 1000,
+      theme: "facebook",
+    });
+  });
 </script>

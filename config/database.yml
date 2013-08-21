@@ -4,8 +4,7 @@ development:
   database: ideahandler_development
   username: root
   password: 
-  
-  #socket: /var/run/mysqld/mysqld.sock
+  socket: /var/run/mysqld/mysqld.sock
 
   # Warning: The database defined as 'test' will be erased and
 # re-generated from your development database when you run 'rake'.
@@ -27,3 +26,4 @@ production:
   password: 
   host: localhost
   port: 3306
+  socket: $OPENSHIFT_HOMEDIR/mysql-5.1/socket/mysql.sock

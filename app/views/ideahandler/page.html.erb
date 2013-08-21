@@ -1,53 +1,44 @@
-<style>
-.container {
-width: 100%;
-
-}
-
-body {
-background: #cff;
-}
-
-header {
-padding-top: 20px;
-}
-
-header img {
-padding: 1em;
-background: #fff;
-}
-
-section {
-margin-top: 1em;
-font-size: 120%;
-padding: 20px;
-background: #fff;
-}
-section h1 {
-font-size: 200%;
-}
-</style>
-<html>
-<head>
-  <title>Idea Manager</title>
-</head>
- <body>
-   <div class="container">
-    <header>
-      <h1><center> Welcome to idea Manager</center></h1>
-      <nav class="round">
-		<ul>
-		  <li><%=link_to "Sign Up", register_path %></li>
-		</ul>
-	  </nav>
-	</header>
-	<section class="round">
-     	<ul>
-		  <li><%= link_to "login", login_path  %></li>
-        </ul>
-    </section>
-   </div>
- </body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Idea Handler</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  </head>
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="#">Idea Handler</a>
+          <div class="nav-collapse collapse">
+            <form class="navbar-form pull-right">
+              <% if current_user == nil %>
+                <%= link_to('Sign Up', register_path , :class => 'btn') %>
+              <% end %>    
+              <% if current_user == nil %>
+               <%= link_to "login", login_path,:class => 'btn' %>
+              <% else %>
+               <%= link_to current_user.email, login_path,:class => 'btn'  %>
+              <% end %> 
+            </form>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="hero-unit">
+        <h1>Hello User</h1>
+        <p>This is site by which You can search and post the ideas</p>
+      </div>
+      <hr>
+    </div>
+  </body>
 </html>
-
-
+<style type="text/css">
+  body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+  }
+</style>

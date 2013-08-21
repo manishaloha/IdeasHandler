@@ -1,3 +1,28 @@
-// Place all the styles related to the Ideahandler controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.container {
+width: 100%;
+
+}
+
+body {
+background: #cff;
+}
+
+header {
+padding-top: 20px;
+}
+
+header img {
+padding: 1em;
+background: #fff;
+}
+
+section {
+margin-top: 1em;
+font-size: 120%;
+padding: 20px;
+background: #fff;
+}
+section h1 {
+font-size: 200%;
+}

@@ -1,21 +1,47 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <title></title>
+    <meta charset="utf-8">
+    <title>Template &middot; Bootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
   </head>
   <body>
-    <div class="container">
-      <h3>Idea</h3>
-      Name: <%= @idea.name %><br/>
-      Description: <%= @idea.description %><br/>
-      <h3>Comments</h3>
-      <% @userideas.each do |comment| %>
-        <% if comment.comment != nil %>
-        <%= comment.comment %><br/>
-        Commented By: <%= comment.user.email %>
-        <br/>
-        <br/>
-        <% end %>
-      <% end %>
-    </div>
+    <div class="container-narrow">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li class="active"><%= link_to  "Home", welcome_path%></li></li>
+          <li class="active"><a href="#">Sign Out</a></li>
+        </ul>
+        <h3 class="muted">Idea Handler</h3>
+      </div>
+      <hr>
+      <div class="jumbotron">
+        <h3>Idea</h3>
+        Name: <%= @idea.name %><br/>
+        Description: <%= @idea.description %><br/>
+      </div>
+      <hr>
+      <div class="row-fluid marketing" style="margin-top: 0%;">
+        <div class="span6">
+          <h3>Comments</h3>
+          <% @userideas.each do |comment| %>
+            <% if comment.comment != nil %>
+              <%= comment.comment %><br/>
+              Commented By: <%= comment.user.email %>
+              <br/>
+              <br/>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div> <!-- /container -->
   </body>
 </html>
+<style type="text/css">
+  body {
+    padding-top: 20px;
+    padding-bottom: 40px;
+  }
+</style>

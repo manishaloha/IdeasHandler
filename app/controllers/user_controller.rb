@@ -1,9 +1,6 @@
 class UserController  < Devise::SessionsController
-  def new
-  	super
-  end
-
-  def show
+ 
+ def show
    if current_user!= nil
      id = current_user.id;
      @follow = []
@@ -24,6 +21,7 @@ class UserController  < Devise::SessionsController
        format.html # show.html.erb
        format.json { render json: @user }
      end
+   
    else
    	  redirect_to home_path, notice: 'Please Login.'
    end
@@ -69,14 +67,17 @@ class UserController  < Devise::SessionsController
     @Userideas.comment = comment
     @Userideas.save
     redirect_to welcome_path, notice: 'successfully added a comment'
-    
-  end
+   end
 
   def showcomment
     
-    idea_id = params[:idea_id];
-    @idea = Idea.find idea_id
-    @userideas = @idea.userideass
+    if current_user != nil
+      idea_id = params[:idea_id];
+      @idea = Idea.find idea_id
+      @userideas = @idea.userideass
+    else
+      redirect_to home_path, notice: 'Please Login'
+    end  
     
   end
 

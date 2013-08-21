@@ -14,7 +14,7 @@ Ideahandler::Application.routes.draw do
 
 
   devise_for :users, :controllers => {:sessions => "user"} do
-    get "/login" => "user#new"
+    get "/login" => "devise/sessions#new"
     get "/register" => "devise/registrations#new"
     get "/welcome" => "user#show"
     get "/follow" => "user#follow"
